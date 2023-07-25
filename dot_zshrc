@@ -18,6 +18,10 @@ HISTFILE=~/.zsh_history
 autoload -Uz compinit
 compinit
 
+# chezmoi autocomplete add
+source ~/.config/zsh/completions/chezmoi.zsh
+source ~/.fzf-tab/fzf-tab.plugin.zsh
+
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' format 'Completing %d'
@@ -32,6 +36,14 @@ zstyle ':completion:*' menu select=long
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
 
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
@@ -43,9 +55,6 @@ eval "$(pyenv init -)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# chezmoi autocomplete add
-source ~/.config/zsh/completions/chezmoi.zsh
-source ~/.fzf.tab/fzf-tab.plugin.zsh
 
 # add snap bin
 export PATH="/snap/bin:$PATH"
