@@ -45,6 +45,7 @@ eval "$(pyenv init -)"
 
 # chezmoi autocomplete add
 source ~/.config/zsh/completions/chezmoi.zsh
+source ~/.fzf.tab/fzf-tab.plugin.zsh
 
 # add snap bin
 export PATH="/snap/bin:$PATH"
